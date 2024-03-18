@@ -1,2 +1,2 @@
-# gloo-mesh-notes
-Repo to document and share notes related to Gloo Mesh and related installation
+## Contents
+* [Installation of multicluster Gloo Mesh, Istio, and sample applications](./installation-notes/)
