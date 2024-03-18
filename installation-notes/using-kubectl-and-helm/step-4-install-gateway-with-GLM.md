@@ -98,4 +98,4 @@ EOF
 * [Step 1 - Install Gloo Mesh Management Plane components in management cluster](./step-1-install-gm-mgmt-server-in-mgmt-cluster.md)
 * [Step 2 - Install Gloo Mesh Agent components in workload cluster](./step-2-install-gm-agent.md)
 * [Step 3 - Install Gloo Mesh Managed Istiod using IstioLifecycleManager](./step-3-install-istio-with-ILM.md)
-* [Step 5 - Install sample applications](./step-5-sample-app.md)
+* [Step 5 (next step) - Install sample applications](./step-5-sample-app.md)

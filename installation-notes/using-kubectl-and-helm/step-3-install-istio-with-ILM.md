@@ -85,5 +85,5 @@ EOF
 
 * [Step 1 - Install Gloo Mesh Management Plane components in management cluster](./step-1-install-gm-mgmt-server-in-mgmt-cluster.md)
 * [Step 2 - Install Gloo Mesh Agent components in workload cluster](./step-2-install-gm-agent.md)
-* [Step 4 - Install Gloo Mesh Managed Istio Ingress gateway using GatewayLifecycleManager](./step-4-install-gateway-with-GLM.md)
+* [Step 4 (next step) - Install Gloo Mesh Managed Istio Ingress gateway using GatewayLifecycleManager](./step-4-install-gateway-with-GLM.md)
 * [Step 5 - Install sample applications](./step-5-sample-app.md)

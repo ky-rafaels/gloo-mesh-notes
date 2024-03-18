@@ -124,6 +124,6 @@ meshctl check --kubecontext "${MGMT_CONTEXT}"
 ### Navigation links for other steps
 
 * [Step 1 - Install Gloo Mesh Management Plane components in management cluster](./step-1-install-gm-mgmt-server-in-mgmt-cluster.md)
-* [Step 3 - Install Gloo Mesh Managed Istiod using IstioLifecycleManager](./step-3-install-istio-with-ILM.md)
+* [Step 3 (next step) - Install Gloo Mesh Managed Istiod using IstioLifecycleManager](./step-3-install-istio-with-ILM.md)
 * [Step 4 - Install Gloo Mesh Managed Istio Ingress gateway using GatewayLifecycleManager](./step-4-install-gateway-with-GLM.md)
 * [Step 5 - Install sample applications](./step-5-sample-app.md)
