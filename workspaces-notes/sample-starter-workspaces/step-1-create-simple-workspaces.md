@@ -24,8 +24,6 @@ EOF
 
 ### Creating Workspace objects
 
-![Workspace](./images/Workspaces.png)
-
 ```bash
 kubectl --context "${MGMT_CONTEXT}" apply -f- <<EOF
 apiVersion: admin.gloo.solo.io/v2
@@ -105,6 +103,8 @@ spec:
       trimProxyConfig: true                     # enable scoping of service discovery to the workspace
 EOF
 ```
+
+![Workspace](./images/Workspaces.png)
 
 ### Check Istio resources created by Gloo Mesh
 ```bash
