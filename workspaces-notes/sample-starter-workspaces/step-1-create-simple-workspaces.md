@@ -63,10 +63,7 @@ spec:
     configEnabled: true          # Gloo Mesh will read Gloo Mesh configuration from this namespace
 EOF
 ```
-
-### Creating WorkspaceSettings objects
-
-client applications (part of client-applications-workspace) needs to discover server applications (part of server-applications-workspace)
+### Creating WorkspaceSettings objects - with service isolation, trim proxy config and without import-export
 
 ```bash
 kubectl --context "${MGMT_CONTEXT}" apply -f- <<EOF
@@ -76,9 +73,6 @@ metadata:
   name: server-applications-workspacesettings
   namespace: server-namespace-gloo-config       # Configuration namespace
 spec:
-  exportTo:
-  - workspaces:
-    - name: client-applications-workspace       # Share service discovery with client-applications-workspace
   options:
     serviceIsolation:
       enabled: true                             # block traffic from outside the Workspace
@@ -94,9 +88,6 @@ metadata:
   name: client-applications-workspacesettings
   namespace: client-namespace-gloo-config       # Configuration namespace
 spec:
-  importFrom:
-  - workspaces:
-    - name: server-applications-workspace       # Import service discovery from server-applications-workspace
   options:
     serviceIsolation:
       enabled: true                             # block traffic from outside the Workspace
@@ -104,9 +95,77 @@ spec:
 EOF
 ```
 
+### Test isolation is effective - grpcurl should fail
+
+```bash
+kubectl --context=${REMOTE_CONTEXT} -n client-namespace exec -it \
+  deploy/netshoot \
+  -c netshoot -- bash
+```
+
+```bash
+grpcurl -plaintext backend.server-namespace:9080 proto.EchoTestService/Echo | jq -r '.message'
+```
+
+### Creating WorkspaceSettings objects
+
+client applications (part of client-applications-workspace) needs to discover server applications (part of server-applications-workspace)
+
+```bash
+kubectl --context "${MGMT_CONTEXT}" apply -f- <<EOF
+apiVersion: admin.gloo.solo.io/v2
+kind: WorkspaceSettings
+metadata:
+  name: server-applications-workspacesettings
+  namespace: server-namespace-gloo-config
+spec:
+# --- Share service discovery with client-applications-workspace ---
+  exportTo:
+  - workspaces:
+    - name: client-applications-workspace
+# ------------------------------------------------------------------
+  options:
+    serviceIsolation:
+      enabled: true
+      trimProxyConfig: true
+EOF
+```
+
+```bash
+kubectl --context "${MGMT_CONTEXT}" apply -f- <<EOF
+apiVersion: admin.gloo.solo.io/v2
+kind: WorkspaceSettings
+metadata:
+  name: client-applications-workspacesettings
+  namespace: client-namespace-gloo-config
+spec:
+# --- Import resources from server-applications-workspace ---
+  importFrom:
+  - workspaces:
+    - name: server-applications-workspace
+# -----------------------------------------------------------
+  options:
+    serviceIsolation:
+      enabled: true
+      trimProxyConfig: true
+EOF
+```
+
 ![Workspace](./images/Workspaces.png)
 
-### Check Istio resources created by Gloo Mesh
+### Test grpcurl is now working
+
+```bash
+kubectl --context=${REMOTE_CONTEXT} -n client-namespace exec -it \
+  deploy/netshoot \
+  -c netshoot -- bash
+```
+
+```bash
+grpcurl -plaintext backend.server-namespace:9080 proto.EchoTestService/Echo | jq -r '.message'
+```
+
+### Check Istio resources created by Gloo Mesh using kubectl and yq
 ```bash
 get-istio-crs-in () {
     # get Istio custom resources in he namespace
