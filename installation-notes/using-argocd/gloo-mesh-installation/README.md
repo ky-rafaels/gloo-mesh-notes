@@ -86,6 +86,38 @@ EOF
 # Gloo agent installation in workload clusters
 (Same steps need to be repeated for each workload clusters)
 
+### Install CRDs
+```bash
+kubectl apply --context "${REMOTE_CONTEXT1}" -f - <<EOF
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gloo-platform-crds
+  namespace: argocd
+spec:
+  destination:
+    namespace: gloo-mesh
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: gloo-platform-crds
+    repoURL: https://storage.googleapis.com/gloo-platform/helm-charts
+    targetRevision: 2.5.4
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true 
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        maxDuration: 3m0s
+        factor: 2
+EOF
+```
+
 ### Checking if the Load Balancer has been provisioned or not
 ```bash
 until kubectl get service/gloo-mesh-mgmt-server --output=jsonpath='{.status.loadBalancer}' --context "${MGMT_CONTEXT}" -n gloo-mesh | grep "ingress"; do : ; done
