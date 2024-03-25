@@ -120,3 +120,36 @@ spec:
       - CreateNamespace=true
 EOF
 ```
+
+# Istio installation
+```bash
+kubectl apply --context "${MGMT_CONTEXT}" -f - <<EOF
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: "istio-${REMOTE_CONTEXT1}"
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/find-arka/gloo-mesh-notes
+    path: installation-notes/using-argocd/gloo-mesh-installation/mgmt-cluster
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m0s
+EOF
+```

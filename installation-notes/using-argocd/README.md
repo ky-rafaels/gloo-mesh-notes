@@ -4,4 +4,12 @@
 
 # Multi cluster service mesh setup notes
 
-*WIP*
+### Install ArgoCD in demo clusters
+
+```bash
+./install-argocd-in-clusters.sh
+```
+
+## Install Gloo Mesh, Istio in multiple clusters using ArgoCD
+
+[Create required ArgoCD Application CRs](./gloo-mesh-installation/README.md)
