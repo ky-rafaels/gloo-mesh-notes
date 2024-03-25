@@ -46,6 +46,8 @@ spec:
             type: LoadBalancer
             annotations:
               service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+        telemetryCollector:
+          enabled: true
     repoURL: https://storage.googleapis.com/gloo-platform/helm-charts
     targetRevision: 2.5.4
   syncPolicy:

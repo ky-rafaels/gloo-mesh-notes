@@ -1,7 +1,3 @@
-# Single cluster service mesh setup notes
-
-[Single cluster Gloo Mesh, Istio service mesh setup with ArgoCD](https://github.com/solo-io/solo-cop/tree/main/blogs/gloo-mesh-argocd)
-
 # Multi cluster service mesh setup notes
 
 ### Install ArgoCD in demo clusters
@@ -13,3 +9,7 @@
 ## Install Gloo Mesh, Istio in multiple clusters using ArgoCD
 
 [Create required ArgoCD Application CRs](./gloo-mesh-installation/README.md)
+
+# Single cluster service mesh setup notes
+
+[Single cluster Gloo Mesh, Istio service mesh setup with ArgoCD](https://github.com/solo-io/solo-cop/tree/main/blogs/gloo-mesh-argocd)
