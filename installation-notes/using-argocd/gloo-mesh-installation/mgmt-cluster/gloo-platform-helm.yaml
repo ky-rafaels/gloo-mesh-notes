@@ -18,7 +18,7 @@ spec:
       skipCrds: true
       values: |
         licensing:
-          glooMeshLicenseKey: "eyJhZGRPbnMiOltdLCJleHAiOjE3MjE3Nzc1MzksImlhdCI6MTY2MTI5NzUzOSwiayI6InY2Z2o2ZyIsImx0IjoiZW50IiwicHJvZHVjdCI6Imdsb28tbWVzaC1nYXRld2F5In0.xLmjo9mWQlQpCnAYdOtqbOo6yL1L8-0mBKN0FgUPxXk"
+          glooMeshLicenseKey: "REDACTED"
           # glooGatewayLicenseKey: ""
           # glooNetworkLicenseKey: ""
         common:
