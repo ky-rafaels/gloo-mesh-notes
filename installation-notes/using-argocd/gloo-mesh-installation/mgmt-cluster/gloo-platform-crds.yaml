@@ -13,7 +13,7 @@ spec:
   source:
     chart: gloo-platform-crds
     repoURL: https://storage.googleapis.com/gloo-platform/helm-charts
-    targetRevision: "${GLOO_MESH_VERSION}"  
+    targetRevision: 2.5.4
   syncPolicy:
     automated:
       prune: true
