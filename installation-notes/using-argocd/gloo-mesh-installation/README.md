@@ -102,14 +102,14 @@ spec:
           cluster: "${REMOTE_CONTEXT1}"
         glooAgent:
           enabled: true
-        relay:
-          serverAddress: "${GLOO_PLATFORM_MGMT_SERVER_ADDRESS}"
+          relay:
+            serverAddress: "${GLOO_PLATFORM_MGMT_SERVER_ADDRESS}"
         telemetryCollector:
           enabled: true
-        config:
-          exporters:
-            otlp:
-              endpoint: "${GLOO_PLATFORM_TELEMETRY_GATEWAY_ADDRESS}"
+          config:
+            exporters:
+              otlp:
+                endpoint: "${GLOO_PLATFORM_TELEMETRY_GATEWAY_ADDRESS}"
     repoURL: https://storage.googleapis.com/gloo-platform/helm-charts
     targetRevision: 2.5.4
   syncPolicy:
