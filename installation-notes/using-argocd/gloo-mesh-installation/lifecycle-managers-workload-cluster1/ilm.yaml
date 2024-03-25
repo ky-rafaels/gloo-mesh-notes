@@ -5,7 +5,8 @@ metadata:
   namespace: gloo-mesh
 spec:
   installations:
-    - # List all workload clusters to install Istio into
+    - revision: "auto"
+      # List all workload clusters to install Istio into
       clusters:
       - name: "cluster-1-arka"
         # If set to true, the spec for this revision is applied in the cluster
