@@ -3,6 +3,8 @@ kind: IstioLifecycleManager
 metadata:
   name: "istiod-control-plane-cluster1"
   namespace: gloo-mesh
+  annotations:
+    argocd.argoproj.io/sync-wave: "-8"
 spec:
   installations:
     - revision: 1-20

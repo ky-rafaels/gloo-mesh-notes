@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster1-glm
+  name: istio-cluster1-lifecyclemanagers
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/find-arka/gloo-mesh-notes
-    path: configuration-notes/02-admin-config/glm
+    path: configuration-notes/02-admin-config/mgmt-cluster/lifecycle-managers
     targetRevision: HEAD
     directory:
       recurse: true
