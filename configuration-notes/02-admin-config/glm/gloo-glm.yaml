@@ -34,3 +34,26 @@ spec:
             label:
               istio: ingressgateway
               app: istio-ingressgateway
+            k8s:
+              service:
+                type: LoadBalancer
+                selector:
+                  istio: ingressgateway
+                # Default ports
+                ports:
+                  # Port for health checks on path /healthz/ready.
+                  # For AWS ELBs, this port must be listed first.
+                  - name: status-port
+                    port: 15021
+                    targetPort: 15021
+                  # Main HTTP ingress port
+                  - name: http2
+                    port: 80
+                    targetPort: 8080
+                  # Main HTTPS ingress port
+                  - name: https
+                    port: 443
+                    targetPort: 8443
+                  - name: tls
+                    port: 15443
+                    targetPort: 15443
