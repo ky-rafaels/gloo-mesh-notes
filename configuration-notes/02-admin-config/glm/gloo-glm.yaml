@@ -28,8 +28,9 @@ spec:
               customService: true
         components:
           ingressGateways:
-            - name: istio-ingressgateway
-              namespace: istio-gateways
-              enabled: true
-              label:
-                istio: ingressgateway
+          - name: istio-ingressgateway
+            namespace: istio-gateways
+            enabled: true
+            label:
+              istio: ingressgateway
+              app: istio-ingressgateway
