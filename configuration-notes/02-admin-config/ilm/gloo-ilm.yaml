@@ -5,10 +5,10 @@ metadata:
   namespace: gloo-mesh
 spec:
   installations:
-    - revision: "auto"
+    - revision: 1-20
       # List all workload clusters to install Istio into
       clusters:
-      - name: "cluster1"
+      - name: cluster1
         # If set to true, the spec for this revision is applied in the cluster
         defaultRevision: true
       # When set to true, the lifecycle manager allows you to perform in-place upgrades by skipping checks that are required for canary upgrades
@@ -51,9 +51,9 @@ spec:
         values:
           global:
             meshID: gloo-mesh
-            network: "cluster1"
+            network: cluster1
             multiCluster:
-              clusterName: "cluster1"
+              clusterName: cluster1
         # Traffic management
         components:
           pilot:
