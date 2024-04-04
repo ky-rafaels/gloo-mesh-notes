@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: netshoot
+  namespace: client-namespace
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netshoot
+  namespace: client-namespace
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netshoot
+  template:
+    metadata:
+      labels:
+        app: netshoot
+    spec:
+      serviceAccountName: netshoot
+      containers:
+      - name: netshoot
+        image: docker.io/nicolaka/netshoot:v0.12
+        command: ["/bin/sh", "-c", "while true; do sleep 10; done"]

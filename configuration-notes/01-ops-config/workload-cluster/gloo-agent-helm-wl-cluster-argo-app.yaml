@@ -23,7 +23,7 @@ spec:
           enabled: true
           relay:
             # "${GLOO_PLATFORM_MGMT_SERVER_ADDRESS}"
-            serverAddress: 172.18.101.2:9900
+            serverAddress: 172.18.101.3:9900
         telemetryCollector:
           enabled: true
           config:

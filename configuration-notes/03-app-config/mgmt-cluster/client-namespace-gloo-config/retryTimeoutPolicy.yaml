@@ -1,0 +1,22 @@
+# This is just an example for future reference
+# apiVersion: resilience.policy.gloo.solo.io/v2
+# kind: RetryTimeoutPolicy
+# metadata:
+#   name: retry-only
+#   namespace: client-namespace-gloo-config
+#   annotations:
+#     cluster.solo.io/cluster: $REMOTE_CLUSTER1
+#     argocd.argoproj.io/sync-wave: "-2"
+# spec:
+#   applyToRoutes:
+#     - route:
+#         labels:
+#           route: reviews # matches on route table route's labels
+#   config:
+#     retries:
+#       attempts: 5 # optional (default is 2)
+#       perTryTimeout: 2s
+#       # retryOn specifies the conditions under which retry takes place. One or more policies can be specified using a ‘,’ delimited list.
+#       retryOn: "connect-failure,refused-stream,unavailable,cancelled,retriable-status-codes,5xx"
+#       # retryRemoteLocalities specifies whether the retries should retry to other localities, will default to false
+#       retryRemoteLocalities: true

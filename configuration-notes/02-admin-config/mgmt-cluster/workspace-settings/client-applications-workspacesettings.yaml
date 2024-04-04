@@ -1,0 +1,10 @@
+apiVersion: admin.gloo.solo.io/v2
+kind: WorkspaceSettings
+metadata:
+  name: client-applications-workspacesettings
+  namespace: client-namespace-gloo-config       # Configuration namespace
+spec:
+  options:
+    serviceIsolation:
+      enabled: true                             # block traffic from outside the Workspace
+      trimProxyConfig: true                     # enable scoping of service discovery to the workspace

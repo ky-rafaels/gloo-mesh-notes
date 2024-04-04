@@ -1,0 +1,15 @@
+apiVersion: admin.gloo.solo.io/v2
+kind: Workspace
+metadata:
+  name: client-applications-workspace
+  namespace: gloo-mesh
+spec:
+  workloadClusters:
+  - name: '*'                    # any cluster that has the namespace 'client-namespace'
+    namespaces:
+    - name: client-namespace
+    configEnabled: false         # Dont read Gloo Mesh configuration from this namespace
+  - name: "${MGMT_CONTEXT}"
+    namespaces:
+    - name: client-namespace-gloo-config
+    configEnabled: true          # Gloo Mesh will read Gloo Mesh configuration from this namespace
