@@ -159,6 +159,11 @@ Now we have to install the same CRDs but on the workload cluster:
 kubectl apply -f workload-cluster/gloo-platform-crds-argo-app.yaml
 ```
 
+Install the Agent Argo app on the workload cluster:
+```bash
+kubectl apply -f workload-cluster/gloo-agent-helm-wl-cluster-argo-app.yaml
+```
+
 Check that everything went as expected:
 ```bash
 kubectl get applications.argoproj.io -n argocd -o wide
