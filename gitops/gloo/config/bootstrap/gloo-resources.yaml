@@ -907,7 +907,7 @@ data:
       datadog:
         api:
           site: us5.datadoghq.com
-          key: d2cfb42e2b92c2ef8d16ee64f8631ab9
+          key: <>
           fail_on_invalid_key: true
       # Custom exporters
       clickhouse:
