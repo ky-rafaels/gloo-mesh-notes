@@ -1,0 +1,63 @@
+common:
+  cluster: mgmt
+glooInsightsEngine:
+  enabled: false
+glooMgmtServer:
+  enabled: true
+  createGlobalWorkspace: true
+  ports:
+    healthcheck: 8091
+glooAgent:
+  enabled: true
+  relay:
+    authority: gloo-mesh-mgmt-server.gloo-mesh
+    serverAddress: 172.18.101.3:9900
+glooUi:
+  enabled: true
+licensing:
+  glooTrialLicenseKey: eyJhZGRPbnMiOlt7IkFkZG9uIjowLCJFeHBpcmVzQXQiOjE3ODU0MjMwNTIsIkxpY2Vuc2VUeXBlIjoiZW50In1dLCJleHAiOjE3ODU0MjMwNTIsImlhdCI6MTY5MDU1NTg1MiwiayI6Ii9BVUxuUSIsImx0IjoiZW50IiwicHJvZHVjdCI6Imdsb28tbWVzaCJ9.e9ZsjNn8Cc1Nc903-83iC9uz-kPYoU3DDWg7ogSQxJU
+prometheus:
+  enabled: true
+redis:
+  deployment:
+    enabled: true
+telemetryCollector:
+  config:
+    exporters:
+      otlp:
+        endpoint: gloo-telemetry-gateway:4317
+  enabled: true
+telemetryColectorCustomization:
+  extraExporters:
+    datadog:
+      api:
+        site: us5.datadoghq.com
+        key: d2cfb42e2b92c2ef8d16ee64f8631ab9
+  extraPipelines:
+    metrics/export-to-datadog:
+      receivers:
+      - otlp
+      processors:
+      - memory_limiter
+      - batch
+      exporters:
+      - datadog
+telemetryGatewayCustomization:
+  extraExporters:
+    datadog:
+      api:
+        site: us5.datadoghq.com
+        key: d2cfb42e2b92c2ef8d16ee64f8631ab9
+  extraPipelines:
+    metrics/workload-clusters:
+      receivers:
+      - otlp
+      processors:
+      - memory_limiter
+      - batch
+      exporters:
+      - datadog
+telemetryGateway:
+  enabled: true
+  service:
+    type: LoadBalancer

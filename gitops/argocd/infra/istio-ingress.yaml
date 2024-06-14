@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: istio-ingress
+  namespace: argocd
+spec:
+  generators:
+    - clusters: {} 
+  template:
+    metadata:
+      name: "istio-ingress"
+    spec:
+      project: default
+      source: 
+        repoURL: 'https://github.com/ky-rafaels/k8s-platform-deploy.git' 
+        targetRevision: fico 
+        path: istio/1.20-solo/istio-ingress
+        helm:
+          releaseName: istio-ingress
+          ignoreMissingValueFiles: true
+          valueFiles:
+            - values.yaml
+            # - values-{{ env }}.yaml
+      destination:
+        name: "in-cluster"
+        namespace: 'istio-ingress'
+      syncPolicy:
+        automated:
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true

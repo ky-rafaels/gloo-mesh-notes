@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: istio-addons 
+  namespace: argocd
+spec:
+  generators:
+    - clusters: {} 
+  template:
+    metadata:
+      name: 'istio-addons'
+    spec:
+      project: default
+      source: 
+        repoURL: 'https://github.com/ky-rafaels/k8s-platform-deploy.git' 
+        targetRevision: fico 
+        path: istio/1.20-solo/addons
+      destination:
+        name: "in-cluster"
+        namespace: 'istio-system'
+      syncPolicy:
+        automated:
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true

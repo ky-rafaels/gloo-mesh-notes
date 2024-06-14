@@ -1,0 +1,18 @@
+gateway:
+  revision: 1-20
+  service:
+    type: LoadBalancer
+  labels:
+    istio.io/rev: 1-20
+    istio: eastwestgateway
+  annotations:
+    proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+    # ad.datadoghq.com/discovery.check_names: '["istio"]'
+    # ad.datadoghq.com/discovery.init_configs: '[{}]'
+    # ad.datadoghq.com/discovery.instances: |
+    #     [
+    #       {
+    #         "istiod_endpoint": "http://%%host%%:15014/metrics",
+    #         "use_openmetrics": "true"
+    #       }
+    #     ]     

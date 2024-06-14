@@ -1,0 +1,28 @@
+common:
+  cluster: cluster1
+glooAgent:
+  enabled: true
+  relay:
+    authority: gloo-mesh-mgmt-server.gloo-mesh
+    serverAddress: 172.18.101.1:9900
+telemetryCollector:
+  config:
+    exporters:
+      otlp:
+        endpoint: 172.18.101.2:4317
+  enabled: true
+telemetryColectorCustomization:
+  extraExporters:
+    datadog:
+      api:
+        site: us5.datadoghq.com  
+        key: d2cfb42e2b92c2ef8d16ee64f8631ab9
+  extraPipelines:
+    metrics/export-to-datadog:
+      receivers:
+      - otlp 
+      processors:
+      - memory_limiter
+      - batch
+      exporters:
+      - datadog 

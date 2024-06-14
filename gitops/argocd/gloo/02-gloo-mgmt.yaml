@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gloo-platform-mgmt
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://storage.googleapis.com/gloo-platform/helm-charts
+      targetRevision: 2.5.6
+      helm:
+        valueFiles:
+        - $values/gloo/config/values/01-mgmt-values.yaml
+      chart: gloo-platform
+    - repoURL: https://github.com/ky-rafaels/k8s-platform-deploy.git
+      targetRevision: fico
+      ref: values
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: gloo-mesh
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true

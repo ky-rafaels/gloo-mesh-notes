@@ -1,0 +1,32 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gloo-platform-agent
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://storage.googleapis.com/gloo-platform/helm-charts
+      targetRevision: 2.5.6
+      helm:
+        valueFiles:
+        ignoreMissingValueFiles: true
+        - $values/gloo/config/values/02-cluster1-values.yaml
+        # - $values/gloo/target-cluster/{{ env }}-values.yaml
+      chart: gloo-platform
+    - repoURL: https://github.com/ky-rafaels/k8s-platform-deploy.git
+      targetRevision: main
+      ref: values
+  destination:
+    # server: 'https://kubernetes.default.svc'
+    server: 'cluster1'
+    namespace: gloo-mesh
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
