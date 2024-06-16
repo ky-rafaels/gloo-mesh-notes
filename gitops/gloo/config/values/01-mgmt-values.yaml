@@ -32,24 +32,9 @@ telemetryColectorCustomization:
     datadog:
       api:
         site: us5.datadoghq.com
-        key: d2cfb42e2b92c2ef8d16ee64f8631ab9
+        key: <datadog-key>
   extraPipelines:
     metrics/export-to-datadog:
-      receivers:
-      - otlp
-      processors:
-      - memory_limiter
-      - batch
-      exporters:
-      - datadog
-telemetryGatewayCustomization:
-  extraExporters:
-    datadog:
-      api:
-        site: us5.datadoghq.com
-        key: d2cfb42e2b92c2ef8d16ee64f8631ab9
-  extraPipelines:
-    metrics/workload-clusters:
       receivers:
       - otlp
       processors:
