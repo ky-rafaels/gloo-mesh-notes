@@ -15,8 +15,8 @@ spec:
         valueFiles:
         - $values/gloo/config/values/01-mgmt-values.yaml
       chart: gloo-platform
-    - repoURL: https://github.com/ky-rafaels/k8s-platform-deploy.git
-      targetRevision: fico
+    - repoURL: https://github.com/ky-rafaels/gloo-mesh-notes.git
+      targetRevision: main
       ref: values
   destination:
     server: 'https://kubernetes.default.svc'

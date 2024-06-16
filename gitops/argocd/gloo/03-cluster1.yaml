@@ -17,7 +17,7 @@ spec:
         - $values/gloo/config/values/02-cluster1-values.yaml
         # - $values/gloo/target-cluster/{{ env }}-values.yaml
       chart: gloo-platform
-    - repoURL: https://github.com/ky-rafaels/k8s-platform-deploy.git
+    - repoURL: https://github.com/ky-rafaels/gloo-mesh-notes.git
       targetRevision: main
       ref: values
   destination:
