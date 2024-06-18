@@ -29,19 +29,46 @@ telemetryCollector:
   enabled: true
 telemetryColectorCustomization:
   extraExporters:
-    datadog:
-      api:
-        site: us5.datadoghq.com
-        key: <datadog-key>
+    # datadog:
+    #   api:
+    #     site: us5.datadoghq.com
+    #     key: <datadog-key>
+    cribl:
+      endpoint: "https://<Cribl_IP_address>:4317"
+      tls:
+        insecure: false
+        insecure_skip_verify: true
+    splunk_hec:
+      token: "<hec-token"
+      endpoint: "https://splunk:8088/services/collector"
+      source: otel
+      sourcetype: otel
+      index: metrics
   extraPipelines:
-    metrics/export-to-datadog:
+    # metrics/export-to-datadog:
+    #   receivers:
+    #   - otlp
+    #   processors:
+    #   - memory_limiter
+    #   - batch
+    #   exporters:
+    #   - datadog
+    metrics/splunk_hec:
       receivers:
-      - otlp
+      - prometheus
       processors:
       - memory_limiter
       - batch
       exporters:
-      - datadog
+      - splunk
+    logs/export-to-cribl:
+      receivers:
+      - otlp
+      processors:
+      - resource/cluster_context
+      - batch/logs
+      exporters:
+      - cribl
 telemetryGateway:
   enabled: true
   service:
