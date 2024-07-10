@@ -1,5 +1,16 @@
 common:
   cluster: mgmt
+rateLimiter:
+  enabled: true
+extAuthService:
+  enabled: true
+  extAuth:
+    apiKeyStorage:
+      name: redis
+      config:
+        host: "redis.gloo-mesh:6379"
+        db: 0
+        secretKey: "this-is-secret"
 glooInsightsEngine:
   enabled: false
 glooMgmtServer:
