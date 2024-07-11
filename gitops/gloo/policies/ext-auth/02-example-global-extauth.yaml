@@ -1,3 +1,5 @@
+# Here is an example to configure cross cluster ext-auth via 
+# virtual destination on a target cluster
 ---
 apiVersion: networking.gloo.solo.io/v2
 kind: VirtualDestination
@@ -30,29 +32,3 @@ spec:
       cluster: mgmt
       name: ext-auth-service-global
       namespace: gloo-mesh-addons
----
-apiVersion: security.policy.gloo.solo.io/v2
-kind: ExtAuthPolicy
-metadata:
-  annotations:
-    cluster.solo.io/cluster: ""
-  name: basic-auth
-  namespace: bookinfo
-spec:
-  applyToDestinations:
-  - port:
-      number: 9080
-    selector:
-      labels:
-        app: ratings
-  config:
-    glooAuth:
-      configs:
-      - basicAuth:
-          apr:
-            users:
-              user:
-                hashedPassword: 8BvzLUO9IfGPGGsPnAgSu1
-                salt: TYiryv0/
-    server:
-      name: default-server
