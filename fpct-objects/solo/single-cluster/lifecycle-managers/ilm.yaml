@@ -2,8 +2,10 @@
 apiVersion: admin.gloo.solo.io/v2
 kind: IstioLifecycleManager
 metadata:
-  name: cluster1-installation
+  name: mgmt-cluster-istiod
   namespace: gloo-mesh
+  annotations:
+    argocd.argoproj.io/sync-wave: "-7"
 spec:
   installations:
     - clusters:
@@ -19,8 +21,8 @@ spec:
           global:
             meshID: mesh1
             multiCluster:
-              clusterName: cluster1
-            network: cluster1
+              clusterName: mgmt 
+            network: mgmt
           cni:
             excludeNamespaces:
             - istio-system
@@ -54,13 +56,11 @@ spec:
 apiVersion: admin.gloo.solo.io/v2
 kind: GatewayLifecycleManager
 metadata:
-  name: cluster1-ingress
+  name: mgmt-ingress
   namespace: gloo-mesh
 spec:
   installations:
     - clusters:
-      - name: cluster1
-        activeGateway: false
       - name: mgmt
         activeGateway: true
       gatewayRevision: 1-20
@@ -113,37 +113,3 @@ spec:
                     value: "sni-dnat"
                   - name: ISTIO_META_REQUESTED_NETWORK_VIEW
                     value: mgmt
-# ---
-# apiVersion: admin.gloo.solo.io/v2
-# kind: GatewayLifecycleManager
-# metadata:
-#   name: cluster1-eastwest
-#   namespace: gloo-mesh
-# spec:
-#   installations:
-#     - clusters:
-#       - name: cluster1
-#         activeGateway: false
-#       gatewayRevision: 1-20
-#       istioOperatorSpec:
-#         profile: empty
-#         hub: us-docker.pkg.dev/gloo-mesh/istio-workshops
-#         tag: 1.20.2-solo
-#         values:
-#           gateways:
-#             istio-ingressgateway:
-#               customService: true
-#         components:
-#           ingressGateways:
-#             - name: istio-eastwestgateway
-#               namespace: istio-gateways
-#               enabled: true
-#               label:
-#                 istio: eastwestgateway
-#                 topology.istio.io/network: cluster1
-#               k8s:
-#                 env:
-#                   - name: ISTIO_META_ROUTER_MODE
-#                     value: "sni-dnat"
-#                   - name: ISTIO_META_REQUESTED_NETWORK_VIEW
-#                     value: cluster1

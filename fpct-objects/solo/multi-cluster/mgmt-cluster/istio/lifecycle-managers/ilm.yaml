@@ -9,6 +9,8 @@ spec:
     - clusters:
       - name: mgmt
         defaultRevision: true
+      - name: cluster1
+        defaultRevision: true
       revision: 1-20
       istioOperatorSpec:
         profile: minimal
