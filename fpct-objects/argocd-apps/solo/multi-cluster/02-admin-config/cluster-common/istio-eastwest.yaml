@@ -2,38 +2,32 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: istiod
+  name: istio-eastwest
   namespace: argocd
 spec:
   generators:
     - clusters: {} 
   template:
     metadata:
-      name: 'istiod'
+      name: "istio-eastwest"
     spec:
       project: default
       source: 
         repoURL: 'https://github.com/ky-rafaels/k8s-platform-deploy.git' 
         targetRevision: fico 
-        path: istio/1.20-solo/istiod
+        path: istio/1.20-solo/istio-eastwest
         helm:
-          releaseName: istiod
+          releaseName: istio-eastwest
           ignoreMissingValueFiles: true
           valueFiles:
             - values.yaml
-            - values-{{ cluster }}.yaml
+            # - values-{{ env }}.yaml
       destination:
         name: "in-cluster"
-        namespace: 'istio-system'
+        namespace: 'istio-eastwest'
       syncPolicy:
         automated:
           prune: true
         syncOptions:
           - CreateNamespace=true
           - ApplyOutOfSyncOnly=true
-      ignoreDifferences:
-        - group: admissionregistration.k8s.io
-          kind: ValidatingWebhookConfiguration
-          name: istiod-default-validator
-          jsonPointers:
-            - /webhooks/0/failurePolicy
