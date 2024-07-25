@@ -1,0 +1,27 @@
+---
+apiVersion: networking.gloo.solo.io/v2
+kind: RouteTable
+metadata:
+  name: httpbin
+  namespace: httpbin
+spec:
+  hosts:
+    - 'httpbin.example.com'
+  virtualGateways:
+    - name: north-south-gw
+      namespace: istio-ingress
+      cluster: cluster1
+  http:
+  - matchers:
+    - uri:
+        prefix: /
+        ignoreCase: true
+    forwardTo:
+      destinations:
+      - ref:
+          name: httpbin
+          namespace: httpbin
+          cluster: cluster1
+        port:
+          number: 8000
+        kind: SERVICE

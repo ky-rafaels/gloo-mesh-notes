@@ -1,0 +1,74 @@
+common:
+  cluster: mgmt
+rateLimiter:
+  enabled: true
+extAuthService:
+  enabled: true
+  extAuth:
+    apiKeyStorage:
+      name: redis
+      config:
+        host: "redis.gloo-mesh:6379"
+        db: 0
+        secretKey: "this-is-secret"
+glooInsightsEngine:
+  enabled: false
+glooMgmtServer:
+  enabled: true
+  createGlobalWorkspace: true
+  ports:
+    healthcheck: 8091
+glooAgent:
+  enabled: true
+  relay:
+    authority: gloo-mesh-mgmt-server.gloo-mesh
+    serverAddress: 172.18.101.3:9900
+glooUi:
+  enabled: true
+licensing:
+  glooTrialLicenseKey: <mesh-key>
+prometheus:
+  enabled: true
+redis:
+  deployment:
+    enabled: true
+telemetryCollector:
+  config:
+    exporters:
+      otlp:
+        endpoint: gloo-telemetry-gateway:4317
+  enabled: true
+telemetryColectorCustomization:
+  extraExporters:
+    cribl:
+      endpoint: "https://<Cribl_IP_address>:4317"
+      tls:
+        insecure: false
+        insecure_skip_verify: true
+    splunk_hec:
+      token: "<hec-token"
+      endpoint: "https://splunk:8088/services/collector"
+      source: otel
+      sourcetype: otel
+      index: metrics
+  extraPipelines:
+    metrics/splunk_hec:
+      receivers:
+      - prometheus
+      processors:
+      - memory_limiter
+      - batch
+      exporters:
+      - splunk
+    logs/export-to-cribl:
+      receivers:
+      - otlp
+      processors:
+      - resource/cluster_context
+      - batch/logs
+      exporters:
+      - cribl
+telemetryGateway:
+  enabled: true
+  service:
+    type: LoadBalancer
