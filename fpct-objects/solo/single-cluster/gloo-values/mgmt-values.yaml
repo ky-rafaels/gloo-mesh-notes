@@ -15,7 +15,7 @@ glooInsightsEngine:
   enabled: false
 glooMgmtServer:
   enabled: true
-  createGlobalWorkspace: true
+  createGlobalWorkspace: true   # Creating global WS for single cluster example
   ports:
     healthcheck: 8091
 glooUi:

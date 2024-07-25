@@ -15,7 +15,7 @@ glooInsightsEngine:
   enabled: false
 glooMgmtServer:
   enabled: true
-  createGlobalWorkspace: true
+  # createGlobalWorkspace: true # Can optionally create a global WS
   ports:
     healthcheck: 8091
 glooAgent:
