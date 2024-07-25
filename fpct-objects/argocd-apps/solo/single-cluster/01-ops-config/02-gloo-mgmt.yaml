@@ -15,8 +15,7 @@ spec:
       targetRevision: 2.5.8
       helm:
         valueFiles:
-        - $values/gloo/config/values/01-mgmt-values.yaml
-        - $values/gloo/config/values/02-agent-values.yaml
+        - $values/solo/single-cluster/gloo-values/mgmt-values.yaml
       chart: gloo-platform
     - repoURL: https://github.com/ky-rafaels/gloo-mesh-notes.git
       targetRevision: main

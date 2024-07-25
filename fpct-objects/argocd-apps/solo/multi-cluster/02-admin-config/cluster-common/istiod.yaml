@@ -15,7 +15,7 @@ spec:
       source: 
         repoURL: 'https://github.com/ky-rafaels/k8s-platform-deploy.git' 
         targetRevision: fico 
-        path: istio/1.20-solo/istiod
+        path: solo/charts/istio-1-20-2/istiod
         helm:
           releaseName: istiod
           ignoreMissingValueFiles: true

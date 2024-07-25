@@ -14,7 +14,7 @@ spec:
       helm:
         valueFiles:
         ignoreMissingValueFiles: true
-        - $values/gloo/config/values/02-agent-values.yaml
+        - $values/solo/multi-cluster/workload-cluster/gloo-values/agent-values.yaml
       chart: gloo-platform
     - repoURL: https://github.com/ky-rafaels/gloo-mesh-notes.git
       targetRevision: main
