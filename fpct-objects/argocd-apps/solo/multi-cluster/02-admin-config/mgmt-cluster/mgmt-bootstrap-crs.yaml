@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -9,14 +10,14 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ky-rafaels/gloo-mesh-notes
-    path: solo/custom-resources/mgmt-cluster
+    path: solo/multi-cluster/mgmt-cluster/custom-resources/mgmt-cluster
     targetRevision: HEAD
     directory:
       recurse: true
   destination:
     # server: https://kubernetes.default.svc
     server: mgmt
-    namespace: httpbin 
+    namespace: gloo-mesh 
   syncPolicy:
     automated:
       prune: true
