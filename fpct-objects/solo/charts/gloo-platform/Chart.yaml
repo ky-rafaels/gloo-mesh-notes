@@ -1,0 +1,9 @@
+apiVersion: v2
+name: gloo-platform
+description: Gloo platform wrapper chart
+type: application
+version: 0.1.0
+dependencies:
+  - name: gloo-platform
+    repository: https://storage.googleapis.com/gloo-platform/helm-charts
+    version: 2.5.8
