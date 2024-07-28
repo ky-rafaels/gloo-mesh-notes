@@ -13,7 +13,7 @@ spec:
     spec:
       project: default
       source: 
-        repoURL: 'https://github.com/ky-rafaels/k8s-platform-deploy.git' 
+        repoURL: 'https://github.com/ky-rafaels/gloo-mesh-notes.git' 
         targetRevision: fico 
         path: solo/charts/istio-1-20-2/istiod
         helm:

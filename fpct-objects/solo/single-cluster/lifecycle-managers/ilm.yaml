@@ -9,7 +9,7 @@ spec:
     - clusters:
       - name: mgmt
         defaultRevision: true
-      revision: 1-20
+      revision: 1-20-test
       istioOperatorSpec:
         profile: minimal
         hub: us-docker.pkg.dev/gloo-mesh/istio-workshops

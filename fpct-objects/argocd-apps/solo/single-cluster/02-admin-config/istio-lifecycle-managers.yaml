@@ -10,11 +10,11 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ky-rafaels/gloo-mesh-notes
-    path: solo/single-cluster/lifecycle-managers
+    path: fpct-objects/solo/single-cluster/lifecycle-managers
     targetRevision: HEAD
   destination:
-    # server: https://kubernetes.default.svc
-    server: mgmt
+    server: https://kubernetes.default.svc
+    # server: mgmt
     namespace: gloo-mesh 
   syncPolicy:
     automated:

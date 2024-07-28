@@ -9,7 +9,7 @@ spec:
     - clusters:
       - name: mgmt
         activeGateway: true
-      gatewayRevision: 1-20
+      gatewayRevision: 1-20-test
       istioOperatorSpec:
         profile: empty
         hub: us-docker.pkg.dev/gloo-mesh/istio-workshops
