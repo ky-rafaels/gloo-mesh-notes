@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gateway-lifecycle-manager
+  name: lifecycle-managers
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
