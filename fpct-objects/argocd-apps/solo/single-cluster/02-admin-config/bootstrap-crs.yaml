@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mgmt-sample-app-gloo-config
+  name: bootstrap-crs 
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ky-rafaels/gloo-mesh-notes
-    path: fpct-objects/solo/custom-resources
+    path: fpct-objects/solo/single-cluster
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
