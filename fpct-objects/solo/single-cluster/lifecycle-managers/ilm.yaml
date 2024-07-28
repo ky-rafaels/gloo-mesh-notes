@@ -1,6 +1,6 @@
 ---
 apiVersion: admin.gloo.solo.io/v2
-kind: IstioLifecycleManagers
+kind: IstioLifecycleManager
 metadata:
   name: single-cluster-installation
   namespace: gloo-mesh
