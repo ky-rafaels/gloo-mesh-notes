@@ -9,13 +9,13 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ky-rafaels/gloo-mesh-notes
-    path: solo/app-configs/workload-cluster
+    path: fpct-objects/solo/app-configs/workload-cluster
     targetRevision: HEAD
     directory:
       recurse: true
   destination:
-    # server: https://kubernetes.default.svc
-    server: mgmt
+    server: https://kubernetes.default.svc
+    # server: mgmt
     namespace: httpbin
   syncPolicy:
     automated:
