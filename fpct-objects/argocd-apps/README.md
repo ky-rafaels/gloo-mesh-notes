@@ -11,3 +11,9 @@ Label the secret
 ```bash
 k label secret in-cluster argocd.argoproj.io/secret-type=cluster -n argocd
 ```
+
+
+## TODO
+
+- include explanation of what needs to be applied in order
+
