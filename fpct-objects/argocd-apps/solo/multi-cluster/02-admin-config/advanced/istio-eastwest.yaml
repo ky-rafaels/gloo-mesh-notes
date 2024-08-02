@@ -14,7 +14,7 @@ spec:
       project: default
       source: 
         repoURL: 'https://github.com/ky-rafaels/gloo-mesh-notes.git' 
-        targetRevision: fico 
+        targetRevision: main 
         path: solo/charts/istio-1-20-2/istio-eastwest
         helm:
           releaseName: istio-eastwest
